@@ -16,7 +16,7 @@
 #mkdir /mnt/boot
 #mount /dev/sda2 /mnt/boot
 
-#pacstrap -K /mnt base linux linux-firmware neovim
+#pacstrap -K /mnt base linux linux-firmware neovim nano
 #genfstab -U /mnt > /mnt/etc/fstab
 #arch-chroot /mnt
 # Run the script once chrooted.
@@ -28,7 +28,7 @@ read -s -n 1 -p 'Are you sure that you have gone through the variables before ru
 
 _HOSTNAME="Zephyrus"
 _USERNAME="ankit"
-_DISK="/dev/sda"
+_DISK="/dev/nvme0n1"
 
 # Very Important:
 alias echo="echo -e"
@@ -55,7 +55,7 @@ mkinitcpio -P
 # Password
 passwd
 
-pacman -S iwd ranger grub neovim sudo
+pacman -S iwd ranger grub neovim sudo efibootmgr
 
 systemctl enable iwd.service
 
@@ -69,14 +69,11 @@ usermod -aG wheel,audio,video,optical,storage,network,input ${_USERNAME}
 echo "nameserver 1.1.1.1" >> /etc/resolv.conf
 systemctl enable systemd-resolved.service
 
-# I know this is not recomended
-EDITOR=nvim visudo
-
 # Legacy boot
-grub-install $_DISK
+#grub-install $_DISK
 # UEFI boot
 #grub-install --target=i386-pc --recheck $_DISK
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --recheck --removable
+#grub-install --target=x86_64-efi --efi-directory=/boot/efi --recheck --removable
 
 #grub-mkconfig -o /boot/grub/grub.cfg
 
