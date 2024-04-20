@@ -55,7 +55,7 @@ mkinitcpio -P
 # Password
 passwd
 
-pacman -S iwd ranger grub neovim sudo efibootmgr
+pacman -S iwd ranger grub neovim sudo efibootmgr linux-headers
 
 systemctl enable iwd.service
 
