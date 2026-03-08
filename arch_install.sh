@@ -50,7 +50,8 @@ echo "${_HOSTNAME}" > /etc/hostname
 # Hosts
 echo "\n\n127.0.0.1	localhost\n::1		localhost\n127.0.1.1	${_HOSTNAME}.localdomain ${_HOSTNAME}" >> /etc/hosts
 
-echo "KEYMAP=us"
+# Keymap
+echo "KEYMAP=us" >> /etc/vconsole.conf
 
 mkinitcpio -P
 
